@@ -1,0 +1,37 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="large" color="#fff" type="square-jelly-box" [fullScreen]="true">
+    <p style="color: white"> Iniciando Sesión</p>
+</ngx-spinner>
+  
+  <section>
+    <div class="imgBx">
+      <img src="https://www.ionos.es/digitalguide/fileadmin/DigitalGuide/Teaser/test-driven-development-t.jpg" alt="Background img" style="background-position: left;"/>
+    </div>
+    <div class="contentBx">
+      <img class="imgBtw" src="../../../assets/cb57d352e14e404393c4170514114thumbnail.jpg" alt="logo btw" style="width: 50%;
+      height: auto;
+      object-fit: contain;">
+      <div class="formBx">
+        <h2>Iniciar Sesión</h2>
+        <form [formGroup]="loginForm">
+          <div class="inputBx">
+            <span>Correo Electrónico</span>
+            <input  formControlName="correo" id="mail" type="text" autocomplete="off" />
+            <span *ngIf="submitted && f.correo.errors"
+              style="color: red; font-size: 12px; font-weight: 600">Debes ingresar un correo válido</span>
+          </div>
+          <div class="inputBx">
+            <span>Contraseña</span>
+            <input formControlName="contrasena" id="password" type="password" name="pass" autocomplete="off" />
+            <span *ngIf="submitted && f.contrasena.errors"
+              style="color: red; font-size: 12px; font-weight: 600">Debes ingresar tu contraseña</span>
+          </div>
+          <div class="inputBx" (click)="submit()">
+            <input type="submit" value="Ingresar" name="" />
+          </div>
+          <div class="inputBx" routerLink="/register">
+            <input type="submit" value="Registrarse" name="" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
