@@ -12,6 +12,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   imports: [
     CommonModule,
     LoginRoutingModule,
+    NgxSpinnerModule
   ]
 })
 export class LoginModule { }

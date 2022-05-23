@@ -1,4 +1,10 @@
 export class UsuarioModel {
-    correo!: string;
-    contrasena!: string;
+    userId!: number;
+    numIdentification!: string;
+    userName!: string;
+    email!: string;
+    password!: string;
+    address!: string;
+    city!: string;
+    phoneNumber!: string;
 }

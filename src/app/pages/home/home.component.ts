@@ -1,38 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Country {
-  name: string;
-  flag: string;
-  area: number;
-  population: number;
-}
-
-const COUNTRIES: Country[] = [
-  {
-    name: 'Russia',
-    flag: 'f/f3/Flag_of_Russia.svg',
-    area: 17075200,
-    population: 146989754
-  },
-  {
-    name: 'Canada',
-    flag: 'c/cf/Flag_of_Canada.svg',
-    area: 9976140,
-    population: 36624199
-  },
-  {
-    name: 'United States',
-    flag: 'a/a4/Flag_of_the_United_States.svg',
-    area: 9629091,
-    population: 324459463
-  },
-  {
-    name: 'China',
-    flag: 'f/fa/Flag_of_the_People%27s_Republic_of_China.svg',
-    area: 9596960,
-    population: 1409517397
-  }
-];
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { UsuarioModel } from 'src/app/shared/models/usuario';
+import { CloseAppComponent } from 'src/app/shared/popups/close-app/close-app.component';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+import { LocalService } from 'src/app/shared/services/local.service';
 
 @Component({
   selector: 'app-home',
@@ -41,11 +13,38 @@ const COUNTRIES: Country[] = [
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  result: UsuarioModel = new UsuarioModel();
+
+  constructor(
+    private localStorage: LocalService,
+    private auth: AuthenticationService,
+    private router: Router,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
+    console.log(this.localStorage.getJsonValue('id'));
+    this.auth.userExist(this.localStorage.getJsonValue('id')).then((res:any) => {
+      if (res.success){
+        this.result = res.result;
+        console.log(this.result);
+      }
+    });
   }
 
-  countries = COUNTRIES;
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CloseAppComponent, {
+      width: '350px',
+      data: {name: this.result.userName},
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  logout(){
+    this.openDialog();
+  }
 
 }

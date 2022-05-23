@@ -8,15 +8,27 @@
             alt="Background img" style="background-position: left;" />
     </div>
     <div class="contentBx">
-        <div class="contentBtn">
-            <button mat-raised-button color="primary" routerLink="/login">Volver</button>
-        </div>
-        <img class="imgBtw" src="../../../assets/cb57d352e14e404393c4170514114thumbnail.jpg" alt="logo btw" style="width: 50%;
-      height: auto;
-      object-fit: contain;">
+
         <div class="formBx">
+            <div class="floating">
+                <button mat-raised-button color="primary" routerLink="/login">Volver</button>
+            </div>
             <h2>Registrate</h2>
             <form [formGroup]="registerForm">
+                <div class="inputBx">
+                    <span>Nombres Completos</span>
+                    <input formControlName="nombre" id="name" type="text" autocomplete="off" />
+                    <span *ngIf="registered && f.nombre.errors"
+                        style="color: red; font-size: 12px; font-weight: 600">por favor ingresa tu nombre
+                        completo</span>
+                </div>
+                <div class="inputBx">
+                    <span>Número de identificación</span>
+                    <input formControlName="identificacion" id="identity" type="text" autocomplete="off" />
+                    <span *ngIf="registered && f.identificacion.errors"
+                        style="color: red; font-size: 12px; font-weight: 600">Recuerda que el número de identificación
+                        es de máximo 15 carácteres</span>
+                </div>
                 <div class="inputBx">
                     <span>Correo Electrónico</span>
                     <input formControlName="correo" id="mail" type="text" autocomplete="off" />
@@ -31,12 +43,33 @@
                 </div>
                 <div class="inputBx">
                     <span>Confirmar Contraseña</span>
-                    <input formControlName="confirmContrasena" id="password" type="password" name="pass"
+                    <input formControlName="confirmContrasena" id="confirmPassword" type="password" name="pass"
                         autocomplete="off" />
                     <span *ngIf="registered && f.confirmContrasena.errors"
                         style="color: red; font-size: 12px; font-weight: 600">Debes ingresar tu contraseña</span>
                     <span *ngIf="f.contrasena.value != f.confirmContrasena.value"
-                        style="color: red; font-size: 12px; font-weight: 600">Verifique que confirmó correctamente la contraseña ingresada anteriormente</span>
+                        style="color: red; font-size: 12px; font-weight: 600">Verifique que confirmó correctamente la
+                        contraseña ingresada anteriormente</span>
+                </div>
+                <div class="inputBx">
+                    <span>Ciudad</span>
+                    <input formControlName="ciudad" id="city" type="text" autocomplete="off" />
+                    <span *ngIf="registered && f.ciudad.errors"
+                        style="color: red; font-size: 12px; font-weight: 600">Ingrese su ciudad de origen</span>
+                </div>
+                <div class="inputBx">
+                    <span>Dirección</span>
+                    <input formControlName="direccion" id="address" type="text" autocomplete="off" />
+                    <span *ngIf="registered && f.direccion.errors"
+                        style="color: red; font-size: 12px; font-weight: 600">Recuerde no sobrepasar los 20
+                        carácteres</span>
+                </div>
+                <div class="inputBx">
+                    <span>Teléfono</span>
+                    <input formControlName="telefono" id="phone" type="text" autocomplete="off" />
+                    <span *ngIf="registered && f.telefono.errors"
+                        style="color: red; font-size: 12px; font-weight: 600">Recuerde no sobrepasar los 20
+                        carácteres</span>
                 </div>
                 <div class="inputBx" (click)="register()">
                     <input type="submit" value="Registrar" name="" />
